@@ -11,7 +11,7 @@ body {
     font-size: 17px;
     font-weight: 300;
     overflow-x: hidden;
-    color: orange;
+    color: white;
     background-color: #2C353C;
 }
 
@@ -37,7 +37,7 @@ p { line-height: 1.9; }
     color: rgb(255, 166, 0);    
 }
 
-.navbar-toggler i { transform: skewX(15deg); }
+.navbar-toggler i { transform: skewX(+15deg); }
 
 .navbar-expand-lg {
     padding-left: 0;
@@ -59,7 +59,7 @@ p { line-height: 1.9; }
 
 .nav-item.active .tm-nav-link,
 .nav-item:hover .tm-nav-link {
-    color: orange;
+    color: #f46700;
 }
 
 /* Page Background */
@@ -80,10 +80,10 @@ p { line-height: 1.9; }
     height: 100%;
 }
 
-.tm-bg-right { background-color: rgba(0,0,0,0.7); }
+.tm-bg-right { background-color: rgba(30,30,30,0.8); }
 
 .tm-bg-left {
-    border-right: 170px solid rgba(0, 0, 0, 0.7);
+    border-right: 120px solid rgba(30,30,30, 0.8);
     border-top: 100vh solid transparent;
 }
 
@@ -96,7 +96,7 @@ p { line-height: 1.9; }
     display: inline-block;
     width: 14px;
     height: 14px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(30,30,30,0.8);
     margin: 6px;
     cursor: pointer;
 }
