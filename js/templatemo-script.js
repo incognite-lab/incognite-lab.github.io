@@ -1,5 +1,5 @@
 const initBg = (autoplay = true) => {
-    const bgImgsNames = ['peppershirt.jpg','pepper_zpravy.png','pepperreach.gif'];
+    const bgImgsNames = ['kuka_collab.png','kuka_overview.png','ur10_fridge.png','panda_darts.png','jaco_vertmaze.png','ur3_baskets.png','ur10_football.png'];
     const bgImgs = bgImgsNames.map(img => "img/" + img);
 
     $.backstretch(bgImgs, {duration: 4000, fade: 500});
