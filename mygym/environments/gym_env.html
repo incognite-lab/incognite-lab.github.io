@@ -1,0 +1,439 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>GymEnv &mdash; mygym 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/mygym_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Baseline networks" href="../baselines/table.html" />
+    <link rel="prev" title="Robots" href="mygym_robots.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> mygym
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">How to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/visualization.html">Visualize workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/basic_training.html">Train a robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/tutorial_parametric.html">Set parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/tutorial_config.html">Edit config file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_camera.html">Train robot - supervised vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/train_vae.html">Train a robot - unsupervised vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/parallel_training.html">Train in parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/tensorboard.html">Evaluate with tensorboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/test_model.html">Test trained model</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How to - advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/write_reward.html">Create custom reward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/create_workspace.html">Create custom workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/create_network.html">Create custom network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/dataset.html">Generate dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Gym</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="workspace.html">Workspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mygym_objects.html">Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mygym_robots.html">Robots</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GymEnv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Baselines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../baselines/table.html">Baseline networks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Important classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/base_env.html">BaseEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/robot.html">Robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/task.html">Task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/reward.html">Reward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../core_modules/vision.html">Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/camera.html">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other/env_object.html">Object</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">mygym</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>GymEnv</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/environments/gym_env.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="gymenv">
+<span id="gym-env"></span><h1>GymEnv<a class="headerlink" href="#gymenv" title="Permalink to this headline">¶</a></h1>
+<p>The GymEnv is a prepared environment for training and testing various robotic tasks.
+Visualized as a gym, it contains several specialized <a class="reference internal" href="workspace.html#workspace"><span class="std std-ref">Workspaces</span></a>, where the training can take place.
+* baskets, collabtable, darts, drawer, football, fridge, maze, stairs, table, verticalmaze</p>
+<span class="target" id="module-myGym.envs.gym_env"></span><dl class="py class">
+<dt id="myGym.envs.gym_env.GymEnv">
+<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.gym_env.</code><code class="sig-name descname">GymEnv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">workspace</span><span class="o">=</span><span class="default_value">'table'</span></em>, <em class="sig-param"><span class="n">object_sampling_area</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dimension_velocity</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">used_objects</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_objects_range</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">action_repeat</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">robot</span><span class="o">=</span><span class="default_value">'kuka'</span></em>, <em class="sig-param"><span class="n">robot_position</span><span class="o">=</span><span class="default_value">[0.0, 0.0, 0.0]</span></em>, <em class="sig-param"><span class="n">robot_orientation</span><span class="o">=</span><span class="default_value">[0, 0, 0]</span></em>, <em class="sig-param"><span class="n">robot_action</span><span class="o">=</span><span class="default_value">'step'</span></em>, <em class="sig-param"><span class="n">robot_init_joint_poses</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">task_type</span><span class="o">=</span><span class="default_value">'reach'</span></em>, <em class="sig-param"><span class="n">task_objects</span><span class="o">=</span><span class="default_value">['virtual_cube_holes']</span></em>, <em class="sig-param"><span class="n">reward_type</span><span class="o">=</span><span class="default_value">'gt'</span></em>, <em class="sig-param"><span class="n">reward</span><span class="o">=</span><span class="default_value">'distance'</span></em>, <em class="sig-param"><span class="n">distance_type</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">active_cameras</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">obs_space</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">visualize</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">visgym</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">logdir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vae_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Environment class for particular environment based on myGym basic environment classes</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param workspace</dt>
+<dd class="field-odd"><p>(string) Workspace in gym, where training takes place (collabtable, maze, drawer, …)</p>
+</dd>
+<dt class="field-even">param object_sampling_area</dt>
+<dd class="field-even"><p>(list of floats) Volume in the scene where objects can appear ([x,x,y,y,z,z])</p>
+</dd>
+<dt class="field-odd">param dimension_velocity</dt>
+<dd class="field-odd"><p>(float) Maximum allowed velocity for robot movements in individual x,y,z axis</p>
+</dd>
+<dt class="field-even">param used_objects</dt>
+<dd class="field-even"><p>(list of strings) Names of extra objects (not task objects) that can appear in the scene</p>
+</dd>
+<dt class="field-odd">param num_objects_range</dt>
+<dd class="field-odd"><p>(list of ints) Minimum and maximum number of extra objects that may appear in the scene</p>
+</dd>
+<dt class="field-even">param action_repeat</dt>
+<dd class="field-even"><p>(int) Amount of steps the robot takes between the simulation steps (updates)</p>
+</dd>
+<dt class="field-odd">param color_dict</dt>
+<dd class="field-odd"><p>(dict) Dictionary of specified colors for chosen objects, Key: object name, Value: RGB color</p>
+</dd>
+<dt class="field-even">param robot</dt>
+<dd class="field-even"><p>(string) Type of robot to train in the environment (kuka, panda, ur3, …)</p>
+</dd>
+<dt class="field-odd">param robot_position</dt>
+<dd class="field-odd"><p>(list) Position of the robot’s base link in the coordinate frame of the environment ([x,y,z])</p>
+</dd>
+<dt class="field-even">param robot_orientation</dt>
+<dd class="field-even"><p>(list) Orientation of the robot’s base link in the coordinate frame of the environment (Euler angles [x,y,z])</p>
+</dd>
+<dt class="field-odd">param robot_action</dt>
+<dd class="field-odd"><p>(string) Mechanism of robot control (absolute, step, joints)</p>
+</dd>
+<dt class="field-even">param robot_init_joint_poses</dt>
+<dd class="field-even"><p>(list) Configuration in which robot will be initialized in the environment. Specified either in joint space as list of joint poses or in the end-effector space as [x,y,z] coordinates.</p>
+</dd>
+<dt class="field-odd">param task_type</dt>
+<dd class="field-odd"><p>(string) Type of learned task (reach, push, …)</p>
+</dd>
+<dt class="field-even">param task_objects</dt>
+<dd class="field-even"><p>(list of strings) Objects that are relevant for performing the task</p>
+</dd>
+<dt class="field-odd">param reward_type</dt>
+<dd class="field-odd"><p>(string) Type of reward signal source (gt, 3dvs, 2dvu)</p>
+</dd>
+<dt class="field-even">param reward</dt>
+<dd class="field-even"><p>(string) Defines how to compute the reward</p>
+</dd>
+<dt class="field-odd">param distance_type</dt>
+<dd class="field-odd"><p>(string) Way of calculating distances (euclidean, manhattan)</p>
+</dd>
+<dt class="field-even">param active_cameras</dt>
+<dd class="field-even"><p>(int) The number of camera used to render and record images</p>
+</dd>
+<dt class="field-odd">param dataset</dt>
+<dd class="field-odd"><p>(bool) Whether this environment serves for image dataset generation</p>
+</dd>
+<dt class="field-even">param obs_space</dt>
+<dd class="field-even"><p>(string) Type of observation data. Specify “dict” for usage of HER training algorithm.</p>
+</dd>
+<dt class="field-odd">param visualize</dt>
+<dd class="field-odd"><p>(bool) Whether to show helping visualization during training and testing of environment</p>
+</dd>
+<dt class="field-even">param visgym</dt>
+<dd class="field-even"><p>(bool) Whether to visualize whole gym building and other tasks (final visualization)</p>
+</dd>
+<dt class="field-odd">param logdir</dt>
+<dd class="field-odd"><p>(string) Directory for logging</p>
+</dd>
+<dt class="field-even">param vae_path</dt>
+<dd class="field-even"><p>(string) Path to a trained VAE in 2dvu reward type</p>
+</dd>
+<dt class="field-odd">param yolact_path</dt>
+<dd class="field-odd"><p>(string) Path to a trained Yolact in 3dvu reward type</p>
+</dd>
+<dt class="field-even">param yolact_config</dt>
+<dd class="field-even"><p>(string) Path to saved Yolact config obj or name of an existing one in the data/Config script or None for autodetection</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="myGym.envs.gym_env.GymEnv.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">random_pos</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">hard</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">random_robot</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Environment reset called at the beginning of an episode. Reset state of objects, robot, task and reward.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param random_pos</dt>
+<dd class="field-odd"><p>(bool) Whether to initiate objects to random locations in the scene</p>
+</dd>
+<dt class="field-even">param hard</dt>
+<dd class="field-even"><p>(bool) Whether to do hard reset (resets whole pybullet scene)</p>
+</dd>
+<dt class="field-odd">param random_robot</dt>
+<dd class="field-odd"><p>(bool) Whether to initiate robot in random pose</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return self._observation</dt>
+<dd class="field-odd"><p>(list) Observation data of the environment</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.gym_env.GymEnv.get_observation">
+<code class="sig-name descname">get_observation</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv.get_observation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv.get_observation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get observation data from the environment</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return observation</dt>
+<dd class="field-odd"><p>(array) Represented position of task relevant objects</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.gym_env.GymEnv.step">
+<code class="sig-name descname">step</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">action</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv.step"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv.step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Environment step in simulation</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param actions</dt>
+<dd class="field-odd"><p>(list) Action data to send to robot to perform movement in this step</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return self._observation</dt>
+<dd class="field-odd"><p>(list) Observation data from the environment after this step</p>
+</dd>
+<dt class="field-even">return reward</dt>
+<dd class="field-even"><p>(float) Reward value assigned to this step</p>
+</dd>
+<dt class="field-odd">return done</dt>
+<dd class="field-odd"><p>(bool) Whether this stop is episode’s final</p>
+</dd>
+<dt class="field-even">return info</dt>
+<dd class="field-even"><p>(dict) Additional information about step</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.gym_env.GymEnv.draw_bounding_boxes">
+<code class="sig-name descname">draw_bounding_boxes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv.draw_bounding_boxes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv.draw_bounding_boxes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show bounding box of object in the scene in GUI</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.gym_env.GymEnv.color_of_object">
+<code class="sig-name descname">color_of_object</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">object</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv.color_of_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv.color_of_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set object’s color</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param object</dt>
+<dd class="field-odd"><p>(object) Object</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return color</dt>
+<dd class="field-odd"><p>(list) RGB color</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../baselines/table.html" class="btn btn-neutral float-right" title="Baseline networks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mygym_robots.html" class="btn btn-neutral float-left" title="Robots" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Nikita Sokovnin.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

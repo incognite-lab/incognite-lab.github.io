@@ -1,0 +1,872 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>myGym.generate_dataset &mdash; mygym 0.0.1 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/mygym_theme.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> mygym
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">How to</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/installation.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/visualization.html">Visualize workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/basic_training.html">Train a robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/tutorial_parametric.html">Set parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/tutorial_config.html">Edit config file</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/train_camera.html">Train robot - supervised vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/train_vae.html">Train a robot - unsupervised vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/parallel_training.html">Train in parallel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/tensorboard.html">Evaluate with tensorboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/test_model.html">Test trained model</a></li>
+</ul>
+<p class="caption"><span class="caption-text">How to - advanced</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/write_reward.html">Create custom reward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/create_workspace.html">Create custom workspace</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/create_network.html">Create custom network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/dataset.html">Generate dataset</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Gym</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../environments/workspace.html">Workspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environments/mygym_objects.html">Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environments/mygym_robots.html">Robots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environments/gym_env.html">GymEnv</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Baselines</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../baselines/table.html">Baseline networks</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Important classes</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../core_modules/base_env.html">BaseEnv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core_modules/robot.html">Robot</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core_modules/task.html">Task</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core_modules/reward.html">Reward</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../core_modules/vision.html">Vision</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/camera.html">Camera</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../other/env_object.html">Object</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">mygym</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>myGym.generate_dataset</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for myGym.generate_dataset</h1><div class="highlight"><pre>
+<span></span><span class="c1">## script to generate train/test sets from the simulator in COCO or DOPE format. Used for vision training.</span>
+
+<span class="kn">import</span> <span class="nn">gym</span>
+<span class="kn">from</span> <span class="nn">myGym</span> <span class="kn">import</span> <span class="n">envs</span>
+<span class="kn">from</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">import</span> <span class="n">imshow</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">commentjson</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">pycocotools.cocostuffhelper</span> <span class="kn">import</span> <span class="n">segmentationToCocoMask</span><span class="p">,</span> <span class="n">segmentationToCocoResult</span>
+<span class="kn">from</span> <span class="nn">pycocotools</span> <span class="kn">import</span> <span class="n">mask</span>
+<span class="kn">import</span> <span class="nn">pybullet</span> <span class="k">as</span> <span class="nn">p</span>
+<span class="kn">from</span> <span class="nn">bbox</span> <span class="kn">import</span> <span class="n">BBox3D</span>
+<span class="kn">from</span> <span class="nn">myGym.envs.wrappers</span> <span class="kn">import</span> <span class="n">RandomizedEnvWrapper</span>
+<span class="kn">import</span> <span class="nn">pkg_resources</span>
+
+<span class="c1"># config, specify here or pass as an input argument</span>
+<span class="n">CONFIG_DEFAULT</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;myGym&quot;</span><span class="p">,</span> <span class="s1">&#39;configs/dataset_coco.json&#39;</span><span class="p">)</span>
+
+<span class="c1"># helper functions:</span>
+<div class="viewcode-block" id="color_names_to_rgb"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.color_names_to_rgb">[docs]</a><span class="k">def</span> <span class="nf">color_names_to_rgb</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Assign RGB colors to objects by name as specified in the training config file</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;myGym&quot;</span><span class="p">,</span> <span class="s1">&#39;configs/rgbcolors.json&#39;</span><span class="p">),</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_file</span><span class="p">:</span>
+        <span class="n">clr</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">read_file</span><span class="p">)</span> <span class="c1">#json file with suggested colors</span>
+        <span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;object_colors&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">new_value</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">new_value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">clr</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+            <span class="n">new_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_value</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_dict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_dict</span></div>
+
+<span class="k">def</span> <span class="nf">_category_coco_format</span><span class="p">():</span> <span class="c1">#COCO</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create list of dictionaries with category id-name pairs in MSCOCO format</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :return categories: (list) Categories in MSCOCO format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">categories</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">value</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">categories</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)})</span>
+    <span class="k">return</span> <span class="n">categories</span>
+
+<span class="k">def</span> <span class="nf">_segmentationToPoly</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert segmentation from RLE to polynoms ([[x1 y1 x2 x2 y2 ...]]). Code from https://github.com/facebookresearch/Detectron/issues/100#issuecomment-362882830.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        :param mask: (array) Bitmap mask</span>
+<span class="sd">        :return segmentationPoly: (list) Segmentation converted to polynoms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">contours</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">findContours</span><span class="p">((</span><span class="n">mask</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">),</span> <span class="n">cv2</span><span class="o">.</span><span class="n">RETR_TREE</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CHAIN_APPROX_SIMPLE</span><span class="p">)</span>
+    <span class="n">segmentationPoly</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">contour</span> <span class="ow">in</span> <span class="n">contours</span><span class="p">:</span>
+        <span class="n">contour</span> <span class="o">=</span> <span class="n">contour</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">segmentationPoly</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">contour</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">segmentationPoly</span>
+
+<div class="viewcode-block" id="create_coco_json"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.create_coco_json">[docs]</a><span class="k">def</span> <span class="nf">create_coco_json</span><span class="p">():</span> <span class="c1">#COCO</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create COCO json data structure</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :return data_train: (dict) Data structure for training data</span>
+<span class="sd">        :return data_test: (dist) Data structure for testing data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_train</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="c1"># file_name, height, width, id</span>
+            <span class="p">],</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;instances&#39;</span><span class="p">,</span>
+            <span class="n">annotations</span><span class="o">=</span><span class="p">[</span><span class="c1"># segmentation, area, iscrowd, image_id, bbox, category_id, id</span>
+            <span class="p">],</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="n">_category_coco_format</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">data_test</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">images</span><span class="o">=</span><span class="p">[</span><span class="c1"># file_name, height, width, id</span>
+            <span class="p">],</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;instances&#39;</span><span class="p">,</span>
+            <span class="n">annotations</span><span class="o">=</span><span class="p">[</span><span class="c1"># segmentation, area, iscrowd, image_id, bbox, category_id, id</span>
+            <span class="p">],</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="n">_category_coco_format</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span></div>
+
+<span class="k">def</span> <span class="nf">create_3D_box</span><span class="p">(</span><span class="n">env_object</span><span class="p">,</span><span class="n">objdim</span><span class="p">):</span> <span class="c1">#DOPE</span>
+    <span class="n">objpos</span> <span class="o">=</span> <span class="n">env_object</span><span class="o">.</span><span class="n">get_position</span><span class="p">()</span>
+    <span class="n">objorient</span> <span class="o">=</span> <span class="n">env_object</span><span class="o">.</span><span class="n">get_orientation</span><span class="p">()</span>
+    <span class="c1">#objdim = env_object.get_cuboid_dimensions()</span>
+    <span class="n">box</span><span class="o">=</span> <span class="n">BBox3D</span><span class="p">(</span><span class="n">objpos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">objpos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">objpos</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">objdim</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">objdim</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">objdim</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">objorient</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="n">objorient</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">objorient</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">objorient</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">box</span><span class="o">.</span><span class="n">p</span><span class="p">,</span><span class="n">box</span><span class="o">.</span><span class="n">center</span>
+
+<div class="viewcode-block" id="GeneratorCoco"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco">[docs]</a><span class="k">class</span> <span class="nc">GeneratorCoco</span><span class="p">:</span> <span class="c1">#COCO</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generator class for COCO image dataset for YOLACT vision model training</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="GeneratorCoco.get_env"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.get_env">[docs]</a>    <span class="k">def</span> <span class="nf">get_env</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create environment for COCO dataset generation according to dataset config file</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :return env: (object) Environment for dataset generation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">RandomizedEnvWrapper</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;env_name&#39;</span><span class="p">],</span>
+            <span class="n">robot</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;robot&#39;</span><span class="p">],</span>
+            <span class="n">render_on</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">gui_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gui_on&#39;</span><span class="p">],</span>
+            <span class="n">show_bounding_boxes_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;show_bounding_boxes_gui&#39;</span><span class="p">],</span>
+            <span class="n">changing_light_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;changing_light_gui&#39;</span><span class="p">],</span>
+            <span class="n">shadows_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;shadows_on&#39;</span><span class="p">],</span>
+            <span class="n">color_dict</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_dict&#39;</span><span class="p">],</span>
+            <span class="n">object_sampling_area</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;object_sampling_area&#39;</span><span class="p">],</span>
+            <span class="n">num_objects_range</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_objects_range&#39;</span><span class="p">],</span>
+            <span class="n">used_objects</span> <span class="o">=</span> <span class="n">used_objects</span><span class="p">,</span>
+            <span class="n">active_cameras</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">],</span>
+            <span class="n">camera_resolution</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;camera_resolution&#39;</span><span class="p">],</span>
+            <span class="n">renderer</span><span class="o">=</span><span class="n">p</span><span class="o">.</span><span class="n">ER_BULLET_HARDWARE_OPENGL</span><span class="p">,</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span> 
+            <span class="n">config_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/config_dataset.json&#39;</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">setGravity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.81</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">env</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.episode_zero"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.episode_zero">[docs]</a>    <span class="k">def</span> <span class="nf">episode_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initial espisode set-up</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id_unique</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#image_id*x for paralel dataset generation, otherwise 0</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.init_data"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.init_data">[docs]</a>    <span class="k">def</span> <span class="nf">init_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize data structures for COCO dataset annotations</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :return data_train: (dict) Data structure for training data</span>
+<span class="sd">            :return data_test: (dist) Data structure for testing data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">create_coco_json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.resume"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.resume">[docs]</a>    <span class="k">def</span> <span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resume COCO dataset generation</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :return data_train: (dict) Training data from preceding dataset generation in COCO data structure</span>
+<span class="sd">            :return data_test: (dist) Testing data from preceding dataset generation in COCO data structure</span>
+<span class="sd">            :return image_id: (int) ID of last generated image in preceding dataset generation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">],</span><span class="s1">&#39;annotations.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data_test</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span> <span class="c1">#happens when test JSON is empty, which can happen for small numbers</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">],</span><span class="s1">&#39;annotations.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">data_train</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="c1"># get the ID of last image</span>
+            <span class="n">img_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">img</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">data_train</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]]</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">img_ids</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span> <span class="c1"># +1 if last sample were test (thus not in here). it&#39;s safe to have holes in the ids, just need to monothically increase</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_unique</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_test</span><span class="p">[</span><span class="s1">&#39;annotations&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_train</span><span class="p">[</span><span class="s1">&#39;annotations&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resuming from image_id </span><span class="si">{}</span><span class="s2"> for episodes: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]))</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="n">data_test</span><span class="p">,</span> <span class="n">data_train</span><span class="p">,</span> <span class="n">image_id</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.data_struct_image"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.data_struct_image">[docs]</a>    <span class="k">def</span> <span class="nf">data_struct_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assign name to COCO dataset image and train of test status</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :param data: (dict) Corresponding data dictionary</span>
+<span class="sd">            :param name: (string) Name of image file for saving</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data_test</span> <span class="k">if</span> <span class="n">isTestSample</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="n">data_train</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;img_</span><span class="si">{}</span><span class="s1">_cam</span><span class="si">{}</span><span class="s1">.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span><span class="n">camera_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.store_image_info"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.store_image_info">[docs]</a>    <span class="k">def</span> <span class="nf">store_image_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append COCO dataset image info to corresponding data dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span><span class="p">[</span><span class="s1">&#39;images&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">file_name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">height</span><span class="o">=</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">width</span><span class="o">=</span><span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="nb">id</span><span class="o">=</span><span class="n">image_id</span><span class="p">,))</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.get_append_annotations"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.get_append_annotations">[docs]</a>    <span class="k">def</span> <span class="nf">get_append_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make and append COCO annotations for each object in the scene</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">seg</span> <span class="o">=</span> <span class="n">segmentationToCocoMask</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span><span class="n">object_uid</span><span class="p">)</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mask</span><span class="o">.</span><span class="n">area</span><span class="p">(</span><span class="n">seg</span><span class="p">))</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">toBbox</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="c1">#1 run length encoding RLE segmentation format</span>
+        <span class="n">seg</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">],</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="c1">#utf-8 format in str</span>
+        <span class="c1">#2 or poly segmentation format</span>
+        <span class="n">bitmap</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span>
+        <span class="n">seg</span> <span class="o">=</span> <span class="n">_segmentationToPoly</span><span class="p">(</span><span class="n">bitmap</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">too_small_obj</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1">#notify and skip the object with too small visible representation</span>
+            <span class="k">assert</span><span class="p">(</span><span class="n">area</span> <span class="o">&gt;</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;min_obj_area&#39;</span><span class="p">])</span>
+            <span class="k">assert</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="c1">#make inverse map id-&gt;name  (just to pretty print)</span>
+            <span class="n">inv_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">too_small_obj</span> <span class="o">=</span> <span class="n">inv_map</span><span class="p">[</span><span class="n">class_id</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+                    <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">id_unique</span><span class="p">,</span>
+                    <span class="n">image_id</span><span class="o">=</span><span class="n">image_id</span><span class="p">,</span>
+                    <span class="n">category_id</span><span class="o">=</span><span class="n">class_id</span><span class="p">,</span>
+                    <span class="n">segmentation</span><span class="o">=</span><span class="n">seg</span><span class="p">,</span>
+                    <span class="n">area</span><span class="o">=</span><span class="n">area</span><span class="p">,</span>
+                    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
+                    <span class="n">iscrowd</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_small_obj</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span> <span class="c1">#area ok</span>
+            <span class="n">data</span><span class="p">[</span><span class="s1">&#39;annotations&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">)</span> <span class="c1">#append annotations</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id_unique</span> <span class="o">+=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#area too small to be realistically seen</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Too small object of class </span><span class="si">{}</span><span class="s1"> with area=</span><span class="si">{}</span><span class="s1"> in img </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">too_small_obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;area&#39;</span><span class="p">],</span> <span class="n">name</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.visualize"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.visualize">[docs]</a>    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Visualize mask and bounding box coordinates for COCO annotated object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">img_mask</span><span class="o">==</span><span class="n">object_uid</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="mi">255</span><span class="o">*</span><span class="n">mask</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="n">im</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">too_small_obj</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Too small object&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;Labeled object&#39;</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="s1">&#39;bbox&#39;</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="GeneratorCoco.write_json_end"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorCoco.write_json_end">[docs]</a>    <span class="k">def</span> <span class="nf">write_json_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#COCO</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Write json file with COCO annotations to output directory</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;resume&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Storing annotations.json at episode </span><span class="si">{}</span><span class="s2"> of </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">flag</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">,</span><span class="s1">&#39;train&#39;</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">flag</span> <span class="o">==</span> <span class="s1">&#39;train&#39;</span><span class="p">:</span>
+                    <span class="n">folder</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">]</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">data_train</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">folder</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">]</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">data_test</span>
+
+                <span class="n">json_name</span> <span class="o">=</span> <span class="s1">&#39;img_</span><span class="si">{}</span><span class="s1">_cam</span><span class="si">{}</span><span class="s1">.json&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span> <span class="n">camera_id</span><span class="p">)</span>
+                <span class="n">json_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;images&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">],</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span><span class="s1">&#39;instances&#39;</span><span class="p">,</span><span class="s2">&quot;annotations&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;annotations&quot;</span><span class="p">],</span> <span class="s2">&quot;categories&quot;</span><span class="p">:</span><span class="n">_category_coco_format</span><span class="p">()}</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder</span><span class="p">,</span><span class="n">json_name</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                         <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_dict</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+                <span class="c1"># clear data and continue</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+                <span class="n">data</span><span class="p">[</span><span class="s2">&quot;annotations&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div></div>
+
+<span class="k">class</span> <span class="nc">GeneratorDope</span><span class="p">:</span> <span class="c1">#DOPE</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;exported_object_classes&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;exported_objects&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+
+    <span class="k">def</span> <span class="nf">get_env</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">RandomizedEnvWrapper</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;env_name&#39;</span><span class="p">],</span>
+            <span class="n">robot</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;robot&#39;</span><span class="p">],</span>
+            <span class="n">render_on</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">gui_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gui_on&#39;</span><span class="p">],</span>
+            <span class="n">show_bounding_boxes_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;show_bounding_boxes_gui&#39;</span><span class="p">],</span>
+            <span class="n">changing_light_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;changing_light_gui&#39;</span><span class="p">],</span>
+            <span class="n">shadows_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;shadows_on&#39;</span><span class="p">],</span>
+            <span class="n">color_dict</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_dict&#39;</span><span class="p">],</span>
+            <span class="n">object_sampling_area</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;object_sampling_area&#39;</span><span class="p">],</span>
+            <span class="n">num_objects_range</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_objects_range&#39;</span><span class="p">],</span>
+            <span class="n">used_objects</span> <span class="o">=</span> <span class="n">used_objects</span><span class="p">,</span>
+            <span class="n">active_cameras</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">],</span>
+            <span class="n">camera_resolution</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;camera_resolution&#39;</span><span class="p">],</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span> <span class="n">config_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/config_dataset.json&#39;</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">setGravity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.81</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">env</span>
+
+    <span class="k">def</span> <span class="nf">episode_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">objdim</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objdim</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">random_robot</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;random_arm_movement&#39;</span><span class="p">],</span> <span class="n">random_pos</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_observation</span><span class="p">()</span>
+            <span class="n">env_objects</span> <span class="o">=</span> <span class="n">observation</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">env_objects</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objdim</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">objdim</span><span class="p">[</span><span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get_cuboid_dimensions</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">init_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="n">data_train</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objects&quot;</span><span class="p">:[]}</span>
+        <span class="n">data_test</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objects&quot;</span><span class="p">:[]}</span>
+        <span class="k">return</span> <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span>
+
+    <span class="k">def</span> <span class="nf">resume</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">files_test</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">)]</span>
+            <span class="n">files_train</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.jpg&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">])</span> <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">)]</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">files_test</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">files_train</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Resuming from image_id </span><span class="si">{}</span><span class="s2"> for episodes: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_id</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">episode_zero</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="n">image_id</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_data</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">init_data</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">image_id</span>
+
+    <span class="k">def</span> <span class="nf">data_struct_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">init_data</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data_test</span> <span class="k">if</span> <span class="n">isTestSample</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="n">data_train</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.jpg&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">image_id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">store_image_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="c1">#write dataset image info</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">image_id</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;resume&quot;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Storing </span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> at episode </span><span class="si">{}</span><span class="s2"> of </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">episode</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]))</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_append_annotations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="n">cuboid_with_centroid</span> <span class="o">=</span> <span class="n">env_object</span><span class="o">.</span><span class="n">get_bounding_box</span><span class="p">()</span>
+        <span class="n">cuboid_centroid</span><span class="o">=</span><span class="n">cuboid_with_centroid</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">cuboid</span><span class="o">=</span><span class="n">cuboid_with_centroid</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">seg</span> <span class="o">=</span> <span class="n">segmentationToCocoMask</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span> <span class="n">object_uid</span><span class="p">)</span>
+        <span class="n">seg</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">seg</span><span class="p">[</span><span class="s1">&#39;counts&#39;</span><span class="p">],</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="c1">#utf-8 format in str</span>
+        <span class="n">bbox</span> <span class="o">=</span> <span class="n">mask</span><span class="o">.</span><span class="n">toBbox</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">bounding_box</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;top_left&#39;</span><span class="p">:</span> <span class="n">bbox</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;bottom_right&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">bbox</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">bbox</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">bbox</span><span class="p">[</span><span class="mi">3</span><span class="p">]]}</span>
+        <span class="n">boxp</span><span class="p">,</span><span class="n">boxc</span> <span class="o">=</span> <span class="n">create_3D_box</span><span class="p">(</span><span class="n">env_object</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">objdim</span><span class="p">[</span><span class="n">class_name</span><span class="p">])</span>
+        <span class="n">box3D</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">boxp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">box3D</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">boxp</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="n">boxc</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">boxc</span><span class="p">)</span>
+        <span class="n">projected_cuboid_centroid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">project_point_to_camera_image</span><span class="p">(</span><span class="n">cuboid_centroid</span><span class="p">,</span> <span class="n">camera_id</span><span class="p">))</span>
+        <span class="n">projected_cuboid</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">project_point_to_camera_image</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">camera_id</span><span class="p">))</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">cuboid</span><span class="p">]</span>
+        <span class="n">projected_3DBB_centroid</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">project_point_to_camera_image</span><span class="p">(</span><span class="n">boxc</span><span class="p">,</span> <span class="n">camera_id</span><span class="p">))</span>
+        <span class="n">projected_3DBB</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">project_point_to_camera_image</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">camera_id</span><span class="p">))</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">box3D</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">class_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span><span class="p">[</span><span class="s2">&quot;exported_object_classes&quot;</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span><span class="p">[</span><span class="s2">&quot;exported_object_classes&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span><span class="p">[</span><span class="s1">&#39;exported_objects&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                    <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">class_name</span><span class="p">,</span>
+                    <span class="s2">&quot;segmentation_class_id&quot;</span><span class="p">:</span> <span class="n">class_id</span><span class="p">,</span>
+                    <span class="s2">&quot;cuboid_dimensions&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">objdim</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span>
+                    <span class="p">})</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">class_name</span><span class="p">,</span>
+                <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="n">class_id</span><span class="p">,</span>
+                <span class="s2">&quot;location&quot;</span><span class="p">:</span><span class="n">env_object</span><span class="o">.</span><span class="n">get_position</span><span class="p">(),</span>
+                <span class="s2">&quot;quaternion_xyzw&quot;</span><span class="p">:</span> <span class="n">env_object</span><span class="o">.</span><span class="n">get_orientation</span><span class="p">(),</span>
+                <span class="s2">&quot;cuboid_centroid&quot;</span><span class="p">:</span> <span class="n">cuboid_centroid</span><span class="p">,</span>
+                <span class="s2">&quot;projected_cuboid_centroid&quot;</span><span class="p">:</span> <span class="n">projected_cuboid_centroid</span><span class="p">,</span>
+                <span class="s2">&quot;bounding_box&quot;</span><span class="p">:</span> <span class="n">bounding_box</span><span class="p">,</span>
+                <span class="s2">&quot;cuboid&quot;</span><span class="p">:</span> <span class="n">cuboid</span><span class="p">,</span>
+                <span class="s2">&quot;projected_cuboid&quot;</span><span class="p">:</span> <span class="n">projected_cuboid</span><span class="p">,</span>
+                <span class="s2">&quot;box3D&quot;</span><span class="p">:</span> <span class="n">box3D</span><span class="p">,</span>
+                <span class="s2">&quot;projected_3DBB&quot;</span><span class="p">:</span> <span class="n">projected_3DBB</span><span class="p">,</span>
+                <span class="s2">&quot;projected_3DBB_centroid&quot;</span><span class="p">:</span> <span class="n">projected_3DBB_centroid</span><span class="p">,</span>
+                <span class="p">}</span>
+        <span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">visualize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">im</span>
+        <span class="k">for</span> <span class="n">projected_cuboid_point</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_cuboid&quot;</span><span class="p">]:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">projected_cuboid_point</span><span class="p">)),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">projected_cuboid_point</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_3DBB&quot;</span><span class="p">]:</span>
+            <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">projected_cuboid_point</span><span class="p">)),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_cuboid_centroid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_cuboid_centroid&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]])),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_3DBB_centroid&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;projected_3DBB_centroid&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]])),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bounding_box&quot;</span><span class="p">][</span><span class="s2">&quot;top_left&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bounding_box&quot;</span><span class="p">][</span><span class="s2">&quot;top_left&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]])),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">UMat</span><span class="p">(</span><span class="n">image</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bounding_box&quot;</span><span class="p">][</span><span class="s2">&quot;bottom_right&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;bounding_box&quot;</span><span class="p">][</span><span class="s2">&quot;bottom_right&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">]])),</span> <span class="mi">4</span><span class="p">,</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">class_name</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s1">&#39;image&#39;</span><span class="p">,</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw_bounding_box_3D</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">draw_bounding_box_3D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="k">for</span> <span class="n">points</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+                <span class="c1">#p.addUserDebugLine([0,0,0], [1,2,3], lineColorRGB=(0.31, 0.78, 0.47), lineWidth = 10)</span>
+                <span class="c1">#points2=(points[0]+0.001,points[1]+0.001,points[2]+0.001)</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">addUserDebugLine</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;box3D&quot;</span><span class="p">][</span><span class="n">points</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;box3D&quot;</span><span class="p">][</span><span class="n">points</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">lineColorRGB</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">),</span> <span class="n">lineWidth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">lifeTime</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">write_json_end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1">#DOPE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">camera</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;camera_settings&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">])):</span> <span class="c1">#loop through active cameras</span>
+            <span class="n">camera_id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+            <span class="n">intrinsic_settings</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_camera_opencv_matrix_values</span><span class="p">(</span><span class="n">camera_id</span><span class="p">)</span>
+            <span class="n">captured_image_size</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;width&quot;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;camera_resolution&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;camera_resolution&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">[</span><span class="s2">&quot;camera_settings&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;camera&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">camera_id</span><span class="p">),</span>
+                <span class="n">intrinsic_settings</span><span class="o">=</span><span class="n">intrinsic_settings</span><span class="p">,</span>
+                <span class="n">captured_image_size</span><span class="o">=</span><span class="n">captured_image_size</span><span class="p">,</span>
+                <span class="p">))</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;resume&quot;</span><span class="p">]:</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;_camera_settings&quot;</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Storing </span><span class="si">{}</span><span class="s2">.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">],</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">],</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">camera</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;_object_settings&quot;</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">],</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">],</span> <span class="n">filename</span><span class="p">),</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GeneratorVae"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorVae">[docs]</a><span class="k">class</span> <span class="nc">GeneratorVae</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generator class for image dataset for VAE vision model training</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">object_settings</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;exported_object_classes&quot;</span><span class="p">:</span> <span class="p">[],</span> <span class="s2">&quot;exported_objects&quot;</span><span class="p">:</span> <span class="p">[]}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imsize</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;imsize&quot;</span><span class="p">]</span> <span class="c1"># only supported format at the moment</span>
+
+<div class="viewcode-block" id="GeneratorVae.get_env"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorVae.get_env">[docs]</a>    <span class="k">def</span> <span class="nf">get_env</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create environment for VAE dataset generation according to dataset config file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">RandomizedEnvWrapper</span><span class="p">(</span><span class="n">env</span><span class="o">=</span><span class="n">gym</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;env_name&#39;</span><span class="p">],</span>
+            <span class="n">robot</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;robot&#39;</span><span class="p">],</span>
+            <span class="n">render_on</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">gui_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;gui_on&#39;</span><span class="p">],</span>
+            <span class="n">show_bounding_boxes_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;show_bounding_boxes_gui&#39;</span><span class="p">],</span>
+            <span class="n">changing_light_gui</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;changing_light_gui&#39;</span><span class="p">],</span>
+            <span class="n">shadows_on</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;shadows_on&#39;</span><span class="p">],</span>
+            <span class="n">color_dict</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_dict&#39;</span><span class="p">],</span>
+            <span class="n">object_sampling_area</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;object_sampling_area&#39;</span><span class="p">],</span>
+            <span class="n">num_objects_range</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_objects_range&#39;</span><span class="p">],</span>
+            <span class="n">used_objects</span> <span class="o">=</span> <span class="n">used_objects</span><span class="p">,</span>
+            <span class="n">active_cameras</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">],</span>
+            <span class="n">camera_resolution</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;camera_resolution&#39;</span><span class="p">],</span>
+            <span class="n">dataset</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">),</span> <span class="n">config_path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/config_dataset.json&#39;</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">setGravity</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.81</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GeneratorVae.collect_data"><a class="viewcode-back" href="../../user_guide/dataset.html#myGym.generate_dataset.GeneratorVae.collect_data">[docs]</a>    <span class="k">def</span> <span class="nf">collect_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Collect data for VAE dataset</span>
+
+<span class="sd">        Parameters:</span>
+<span class="sd">            :param steps: (int) Number of episodes initiated during dataset generation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">steps</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imsize</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">random_pos</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]</span>
+            <span class="c1">#action = [2,2,2,2,2,2]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">reset_random</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+            <span class="c1"># send the Kuka arms up</span>
+            <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">observation</span><span class="p">[</span><span class="s1">&#39;camera_data&#39;</span><span class="p">][</span><span class="mi">6</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+            <span class="n">imgs</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">imgs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">450</span><span class="p">,</span><span class="mi">100</span><span class="p">:</span><span class="mi">500</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imsize</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imsize</span><span class="p">))</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">waitKey</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">padding</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">7999</span><span class="p">))</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">padding</span> <span class="o">*</span> <span class="s2">&quot;0&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">7999</span><span class="p">)</span>
+            <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dataset_pth</span><span class="p">,</span> <span class="s2">&quot;img_</span><span class="si">{}</span><span class="s2">.png&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">)),</span> <span class="n">img</span><span class="p">)</span>
+            <span class="n">data</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">img</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">steps</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+
+<span class="c1"># main</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">config_path</span> <span class="o">=</span> <span class="n">CONFIG_DEFAULT</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No config.json passed in argument. Loading default config: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CONFIG_DEFAULT</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">config_path</span> <span class="o">=</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s2">&quot;myGym&quot;</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config_path</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">commentjson</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="c1"># initialize dataset generator</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;dataset_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coco&#39;</span><span class="p">:</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="n">GeneratorCoco</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;dataset_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;dope&#39;</span><span class="p">:</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="n">GeneratorDope</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;dataset_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;vae&#39;</span><span class="p">:</span>
+        <span class="n">generator</span> <span class="o">=</span> <span class="n">GeneratorVae</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;dataset_type in config: use one of &#39;coco&#39;, &#39;dope&#39;, &#39;vae&#39;!&quot;</span><span class="p">)</span>
+
+    <span class="c1">#prepare directories</span>
+    <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/test&#39;</span>
+    <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/train&#39;</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_test_folder&quot;</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;output_train_folder&quot;</span><span class="p">],</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1">#define objects to appear in the env, add colors</span>
+    <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names_quantity&#39;</span><span class="p">]])</span>
+    <span class="n">used_objects</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names_quantity&#39;</span><span class="p">]:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">used_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_dict&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;object_colors&#39;</span><span class="p">:</span>
+        <span class="n">color_names_to_rgb</span><span class="p">()</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;texture_randomizer&#39;</span><span class="p">][</span><span class="s1">&#39;exclude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;objects&quot;</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">[</span><span class="s1">&#39;color_randomizer&#39;</span><span class="p">][</span><span class="s1">&#39;exclude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;objects&quot;</span><span class="p">)</span>
+
+    <span class="c1">#write config.json to output_folder</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;/config_dataset.json&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+          <span class="n">commentjson</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;dataset_type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;vae&#39;</span><span class="p">:</span>
+            <span class="n">generator</span><span class="o">.</span><span class="n">get_env</span><span class="p">()</span>
+            <span class="n">dataset_pth</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_folder&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/train&#39;</span>
+            <span class="n">generator</span><span class="o">.</span><span class="n">collect_data</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">])</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dataset finished. Ready to train!&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">SystemExit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># initialize pybullet env</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">get_env</span><span class="p">()</span>
+    <span class="n">first_link_uid</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">robot_uid</span>
+    <span class="n">robot_uids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="n">first_link_uid</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">gripper_index</span><span class="p">)],</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">gripper_uids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([((</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="n">first_link_uid</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">gripper_index</span><span class="p">,</span> <span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">num_joints</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)])</span>
+
+    <span class="c1"># check mode of writing files</span>
+    <span class="n">image_id</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1">#for paralel dataset generation &gt;0, otherwise 0</span>
+    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;new&quot;</span><span class="p">:</span> <span class="c1">#cleanup files</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">],</span><span class="s1">&#39;./*&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">files</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">],</span><span class="s1">&#39;./*&#39;</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">init_data</span><span class="p">()</span>
+        <span class="n">generator</span><span class="o">.</span><span class="n">episode_zero</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;resume&#39;</span><span class="p">:</span> <span class="c1">#resume</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Restoring dataset generation&quot;</span><span class="p">)</span>
+        <span class="n">data_test</span><span class="p">,</span> <span class="n">data_train</span><span class="p">,</span> <span class="n">image_id</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">resume</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;display&quot;</span><span class="p">):</span>
+        <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">init_data</span><span class="p">()</span>
+        <span class="n">generator</span><span class="o">.</span><span class="n">episode_zero</span><span class="p">()</span>
+
+    <span class="c1"># the main loop</span>
+    <span class="k">for</span> <span class="n">episode</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">image_id</span><span class="o">/</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">]))),</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]):</span> <span class="c1">#loop through episodes</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;episode: </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">episode</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]))</span>
+        <span class="c1">#env reset</span>
+        <span class="c1">#random_robot randomizes the init position of robots</span>
+        <span class="c1">#random_pos randomizes the init positions of objects</span>
+        <span class="c1"># if episode == 0:</span>
+        <span class="c1">#     generator.episode_zero()</span>
+        <span class="k">if</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes_hard_reset&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#to prevent objects vanishing when GUI is on</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hard reset!!!&quot;</span><span class="p">)</span>
+            <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">hard</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">env</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">random_robot</span><span class="o">=</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;random_arm_movement&#39;</span><span class="p">],</span> <span class="n">random_pos</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">hard</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">observation</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">get_observation</span><span class="p">()</span>
+        <span class="n">env_objects</span> <span class="o">=</span> <span class="n">observation</span><span class="p">[</span><span class="s2">&quot;objects&quot;</span><span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]):</span> <span class="c1">#loop through steps</span>
+            <span class="c1"># randomize the movements of robots (using joint control)</span>
+            <span class="n">action</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">action_space</span><span class="o">.</span><span class="n">sample</span><span class="p">()</span>
+            <span class="n">observation</span><span class="p">,</span> <span class="n">reward</span><span class="p">,</span> <span class="n">done</span><span class="p">,</span> <span class="n">info</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_steps&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">t</span><span class="o">%</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_shot_every_frame&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="c1"># we only use frames from some steps</span>
+                <span class="n">env</span><span class="o">.</span><span class="n">render</span><span class="p">()</span> <span class="c1">#only render at the steps/frames we use for dataset</span>
+                <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">])):</span> <span class="c1">#loop through active cameras</span>
+                    <span class="n">camera_id</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;active_cameras&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="n">c</span><span class="p">]</span>
+                    <span class="n">image_id</span> <span class="o">=</span> <span class="n">image_id</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">#unique</span>
+                    <span class="n">isTestSample</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_sample</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;train_test_split_pct&#39;</span><span class="p">]</span> <span class="c1"># bool, test/train data?</span>
+                    <span class="n">path</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_test_folder&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">isTestSample</span> <span class="o">==</span> <span class="kc">True</span> <span class="k">else</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;output_train_folder&#39;</span><span class="p">]</span>
+
+                    <span class="c1">#get dataset image and its mask</span>
+                    <span class="n">im</span> <span class="o">=</span> <span class="n">observation</span><span class="p">[</span><span class="s2">&quot;camera_data&quot;</span><span class="p">][</span><span class="n">camera_id</span><span class="p">][</span><span class="s2">&quot;image&quot;</span><span class="p">]</span>
+                    <span class="n">im</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_RGB2BGR</span><span class="p">)</span> <span class="c1">#fix colors</span>
+                    <span class="n">img_mask</span> <span class="o">=</span> <span class="n">observation</span><span class="p">[</span><span class="s2">&quot;camera_data&quot;</span><span class="p">][</span><span class="n">camera_id</span><span class="p">][</span><span class="s2">&quot;segmentation_mask&quot;</span><span class="p">]</span>
+                    <span class="n">obj_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">img_mask</span><span class="p">)]</span> <span class="c1">#identify objects(links) in the camera view (in the image)</span>
+                    <span class="n">img_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span><span class="n">gripper_uids</span><span class="p">),</span> <span class="n">gripper_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_mask</span><span class="p">)</span> <span class="c1">#merge gripper links</span>
+                    <span class="n">img_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">img_mask</span><span class="p">,</span><span class="n">robot_uids</span><span class="p">),</span> <span class="n">robot_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img_mask</span><span class="p">)</span> <span class="c1">#merge robot links</span>
+                    <span class="n">obj_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">img_mask</span><span class="p">)]</span> <span class="c1">#identify merged objects in the camera view (in the image)</span>
+                    <span class="c1">#prepare data strucuture</span>
+                    <span class="n">data</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">data_struct_image</span><span class="p">()</span>
+
+                    <span class="k">for</span> <span class="n">object_uid</span> <span class="ow">in</span> <span class="n">obj_ids</span><span class="p">:</span> <span class="c1">#loop through kuka and used objects in the image (in the camera view)</span>
+                        <span class="k">if</span> <span class="n">object_uid</span> <span class="o">==</span> <span class="n">robot_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                            <span class="n">class_name</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;robot&#39;</span><span class="p">]</span>
+                        <span class="k">elif</span> <span class="n">object_uid</span> <span class="o">==</span> <span class="n">gripper_uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                            <span class="n">class_name</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">robot</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">env_object_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="nb">object</span><span class="p">:</span> <span class="nb">object</span><span class="o">.</span><span class="n">uid</span> <span class="o">==</span> <span class="n">object_uid</span><span class="p">,</span> <span class="n">env_objects</span><span class="p">))</span>
+                            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">env_object_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="n">env_object</span> <span class="o">=</span> <span class="n">env_object_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                                <span class="n">class_name</span> <span class="o">=</span> <span class="n">env_object</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">continue</span>
+                        <span class="k">if</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">]:</span>
+                            <span class="n">class_id</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;used_class_names&#39;</span><span class="p">][</span><span class="n">class_name</span><span class="p">]</span>
+                            <span class="n">generator</span><span class="o">.</span><span class="n">get_append_annotations</span><span class="p">()</span> <span class="c1">#annotate and append annotations</span>
+                            <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;visualize&#39;</span><span class="p">]:</span> <span class="c1">#visualize</span>
+                                <span class="n">generator</span><span class="o">.</span><span class="n">visualize</span><span class="p">()</span>
+
+                    <span class="c1">#store dataset image and info</span>
+                    <span class="n">generator</span><span class="o">.</span><span class="n">store_image_info</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;make_dataset&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;new&quot;</span><span class="p">,</span> <span class="s2">&quot;resume&quot;</span><span class="p">]:</span>
+                        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">name</span><span class="p">),</span> <span class="n">im</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">IMWRITE_JPEG_QUALITY</span><span class="p">),</span> <span class="mi">70</span><span class="p">])</span>
+
+            <span class="k">if</span> <span class="n">done</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Episode finished after </span><span class="si">{}</span><span class="s2"> timesteps&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">break</span>
+
+        <span class="c1"># write JSON annotations every n periods or at the end</span>
+        <span class="k">if</span> <span class="n">episode</span> <span class="o">%</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;autosafe_episode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">episode</span> <span class="o">==</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;num_episodes&#39;</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">generator</span><span class="o">.</span><span class="n">write_json_end</span><span class="p">()</span>
+            <span class="n">data_train</span><span class="p">,</span> <span class="n">data_test</span> <span class="o">=</span> <span class="n">generator</span><span class="o">.</span><span class="n">init_data</span><span class="p">()</span>
+
+    <span class="c1"># end</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;DATASET FINISHED&#39;</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, Nikita Sokovnin.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
