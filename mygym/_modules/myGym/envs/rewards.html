@@ -374,6 +374,100 @@
 
         <span class="k">return</span> <span class="n">norm_diff</span></div></div>
 
+<div class="viewcode-block" id="PnPDistanceReward"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.PnPDistanceReward">[docs]</a><span class="k">class</span> <span class="nc">PnPDistanceReward</span><span class="p">(</span><span class="n">DistanceReward</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reward class for reward signal calculation based on distance differences between 4 objects, e.g. 1 object and gripper, finger1, finger2 for Panda</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        :param env: (object) Environment, where the training takes place</span>
+<span class="sd">        :param task: (object) Task that is being trained, instance of a class TaskModule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">env</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PnPDistanceReward</span><span class="p">,</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">task</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="PnPDistanceReward.compute"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.PnPDistanceReward.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observation</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute reward signal based on distances between 4 objects. The position of the objects must be present in observation.</span>
+
+<span class="sd">        Params:</span>
+<span class="sd">            :param observation: (list) Observation of the environment</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            :return reward: (float) Reward signal for the environment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_dist_diff</span><span class="p">(</span><span class="n">observation</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">],</span> <span class="n">observation</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">observation</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">],</span> <span class="n">observation</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">])</span>
+        <span class="n">reward</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calc_orn_diff</span><span class="p">(</span><span class="n">observation</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">16</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">check_distance_threshold</span><span class="p">(</span><span class="n">observation</span><span class="o">=</span><span class="n">observation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rewards_history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">reward</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reward</span></div>
+
+<div class="viewcode-block" id="PnPDistanceReward.reset"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.PnPDistanceReward.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset stored value of distance between objects. Call this after the end of an episode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_gripper_orn</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="PnPDistanceReward.calc_dist_diff"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.PnPDistanceReward.calc_dist_diff">[docs]</a>    <span class="k">def</span> <span class="nf">calc_dist_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj1_position</span><span class="p">,</span> <span class="n">obj2_position</span><span class="p">,</span> <span class="n">obj3_position</span><span class="p">,</span> <span class="n">obj4_position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate change in the distances between 4 objects in previous and in current step. Normalize the change by the value of distance in previous step.</span>
+
+<span class="sd">        Params:</span>
+<span class="sd">            :param obj1_position: (list) Position of the first object</span>
+<span class="sd">            :param obj2_position: (list) Position of the second object</span>
+<span class="sd">            :param obj3_position: (list) Position of the third object</span>
+<span class="sd">            :param obj4_position: (list) Position of the fourth object</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            :return norm_diff: (float) Sum of normalized differences of distances between 4 objects in previsous and in current step</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj2_position</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span> <span class="o">=</span> <span class="n">obj1_position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj2_position</span> <span class="o">=</span> <span class="n">obj2_position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span> <span class="o">=</span> <span class="n">obj3_position</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span> <span class="o">=</span> <span class="n">obj4_position</span>
+
+        <span class="n">prev_diff_12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj2_position</span><span class="p">)</span>
+        <span class="n">current_diff_12</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="n">obj1_position</span><span class="p">,</span> <span class="n">obj2_position</span><span class="p">)</span>
+
+        <span class="n">prev_diff_13</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span><span class="p">)</span>
+        <span class="n">current_diff_13</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="n">obj1_position</span><span class="p">,</span> <span class="n">obj3_position</span><span class="p">)</span>
+
+        <span class="n">prev_diff_14</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span><span class="p">)</span>
+        <span class="n">current_diff_14</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_distance</span><span class="p">(</span><span class="n">obj1_position</span><span class="p">,</span> <span class="n">obj4_position</span><span class="p">)</span>
+        
+        <span class="c1">#norm_diff = (prev_diff_12 - current_diff_12) / prev_diff_12 + (prev_diff_13 - current_diff_13) / prev_diff_13 + (prev_diff_14 - current_diff_14) / prev_diff_14</span>
+        <span class="n">norm_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">prev_diff_12</span> <span class="o">-</span> <span class="n">current_diff_12</span><span class="p">)</span> <span class="o">/</span> <span class="n">prev_diff_12</span> <span class="o">+</span> <span class="p">(</span><span class="n">prev_diff_13</span> <span class="o">-</span> <span class="n">current_diff_13</span><span class="p">)</span> <span class="o">/</span> <span class="n">prev_diff_13</span><span class="c1"># + (prev_diff_14 - current_diff_14) / prev_diff_14</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj1_position</span> <span class="o">=</span> <span class="n">obj1_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj2_position</span> <span class="o">=</span> <span class="n">obj2_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj3_position</span> <span class="o">=</span> <span class="n">obj3_position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_obj4_position</span> <span class="o">=</span> <span class="n">obj4_position</span>
+
+        <span class="k">return</span> <span class="n">norm_diff</span></div>
+
+<div class="viewcode-block" id="PnPDistanceReward.calc_orn_diff"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.PnPDistanceReward.calc_orn_diff">[docs]</a>    <span class="k">def</span> <span class="nf">calc_orn_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gripper_orn</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate change in the distances between 4 objects in previous and in current step. Normalize the change by the value of distance in previous step.</span>
+
+<span class="sd">        Params:</span>
+<span class="sd">            :param gripper_orn: (list) Orientation of gripper</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            :return norm_diff: (float) Normalized differences of distances between desired orientation and orientation of gripper</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prev_gripper_orn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">prev_gripper_orn</span> <span class="o">=</span> <span class="n">gripper_orn</span>
+
+        <span class="n">prev_diff_orn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_rotation_diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prev_gripper_orn</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">current_diff_orn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">calc_rotation_diff</span><span class="p">(</span><span class="n">gripper_orn</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="n">norm_diff</span> <span class="o">=</span> <span class="p">(</span><span class="n">prev_diff_orn</span> <span class="o">-</span> <span class="n">current_diff_orn</span><span class="p">)</span> <span class="o">/</span> <span class="n">prev_diff_orn</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prev_gripper_orn</span> <span class="o">=</span> <span class="n">gripper_orn</span>
+
+        <span class="k">return</span> <span class="n">norm_diff</span></div></div>
 
 <div class="viewcode-block" id="SparseReward"><a class="viewcode-back" href="../../../core_modules/reward.html#myGym.envs.rewards.SparseReward">[docs]</a><span class="k">class</span> <span class="nc">SparseReward</span><span class="p">(</span><span class="n">Reward</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>

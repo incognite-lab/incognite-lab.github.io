@@ -204,7 +204,7 @@ Visualized as a gym, it contains several specialized <a class="reference interna
 * baskets, collabtable, darts, drawer, football, fridge, maze, stairs, table, verticalmaze</p>
 <span class="target" id="module-myGym.envs.gym_env"></span><dl class="py class">
 <dt id="myGym.envs.gym_env.GymEnv">
-<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.gym_env.</code><code class="sig-name descname">GymEnv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">workspace</span><span class="o">=</span><span class="default_value">'table'</span></em>, <em class="sig-param"><span class="n">object_sampling_area</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dimension_velocity</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">used_objects</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_objects_range</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">action_repeat</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">robot</span><span class="o">=</span><span class="default_value">'kuka'</span></em>, <em class="sig-param"><span class="n">robot_position</span><span class="o">=</span><span class="default_value">[0.0, 0.0, 0.0]</span></em>, <em class="sig-param"><span class="n">robot_orientation</span><span class="o">=</span><span class="default_value">[0, 0, 0]</span></em>, <em class="sig-param"><span class="n">robot_action</span><span class="o">=</span><span class="default_value">'step'</span></em>, <em class="sig-param"><span class="n">robot_init_joint_poses</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">task_type</span><span class="o">=</span><span class="default_value">'reach'</span></em>, <em class="sig-param"><span class="n">task_objects</span><span class="o">=</span><span class="default_value">['virtual_cube_holes']</span></em>, <em class="sig-param"><span class="n">reward_type</span><span class="o">=</span><span class="default_value">'gt'</span></em>, <em class="sig-param"><span class="n">reward</span><span class="o">=</span><span class="default_value">'distance'</span></em>, <em class="sig-param"><span class="n">distance_type</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">active_cameras</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">obs_space</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">visualize</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">visgym</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">logdir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vae_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.gym_env.</code><code class="sig-name descname">GymEnv</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">workspace</span><span class="o">=</span><span class="default_value">'table'</span></em>, <em class="sig-param"><span class="n">object_sampling_area</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dimension_velocity</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">used_objects</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">num_objects_range</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">action_repeat</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">color_dict</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">robot</span><span class="o">=</span><span class="default_value">'kuka'</span></em>, <em class="sig-param"><span class="n">robot_position</span><span class="o">=</span><span class="default_value">[0.0, 0.0, 0.0]</span></em>, <em class="sig-param"><span class="n">robot_orientation</span><span class="o">=</span><span class="default_value">[0, 0, 0]</span></em>, <em class="sig-param"><span class="n">robot_action</span><span class="o">=</span><span class="default_value">'step'</span></em>, <em class="sig-param"><span class="n">robot_init_joint_poses</span><span class="o">=</span><span class="default_value">[]</span></em>, <em class="sig-param"><span class="n">task_type</span><span class="o">=</span><span class="default_value">'reach'</span></em>, <em class="sig-param"><span class="n">num_subgoals</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">task_objects</span><span class="o">=</span><span class="default_value">['virtual_cube_holes']</span></em>, <em class="sig-param"><span class="n">reward_type</span><span class="o">=</span><span class="default_value">'gt'</span></em>, <em class="sig-param"><span class="n">reward</span><span class="o">=</span><span class="default_value">'distance'</span></em>, <em class="sig-param"><span class="n">distance_type</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">active_cameras</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">obs_space</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">visualize</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">visgym</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">logdir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">vae_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/gym_env.html#GymEnv"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.gym_env.GymEnv" title="Permalink to this definition">¶</a></dt>
 <dd><p>Environment class for particular environment based on myGym basic environment classes</p>
 <dl class="simple">
 <dt>Parameters:</dt><dd><dl class="field-list simple">
@@ -247,44 +247,47 @@ Visualized as a gym, it contains several specialized <a class="reference interna
 <dt class="field-odd">param task_type</dt>
 <dd class="field-odd"><p>(string) Type of learned task (reach, push, …)</p>
 </dd>
-<dt class="field-even">param task_objects</dt>
-<dd class="field-even"><p>(list of strings) Objects that are relevant for performing the task</p>
+<dt class="field-even">param num_subgoals</dt>
+<dd class="field-even"><p>(int) Number of subgoals in task</p>
 </dd>
-<dt class="field-odd">param reward_type</dt>
-<dd class="field-odd"><p>(string) Type of reward signal source (gt, 3dvs, 2dvu)</p>
+<dt class="field-odd">param task_objects</dt>
+<dd class="field-odd"><p>(list of strings) Objects that are relevant for performing the task</p>
 </dd>
-<dt class="field-even">param reward</dt>
-<dd class="field-even"><p>(string) Defines how to compute the reward</p>
+<dt class="field-even">param reward_type</dt>
+<dd class="field-even"><p>(string) Type of reward signal source (gt, 3dvs, 2dvu)</p>
 </dd>
-<dt class="field-odd">param distance_type</dt>
-<dd class="field-odd"><p>(string) Way of calculating distances (euclidean, manhattan)</p>
+<dt class="field-odd">param reward</dt>
+<dd class="field-odd"><p>(string) Defines how to compute the reward</p>
 </dd>
-<dt class="field-even">param active_cameras</dt>
-<dd class="field-even"><p>(int) The number of camera used to render and record images</p>
+<dt class="field-even">param distance_type</dt>
+<dd class="field-even"><p>(string) Way of calculating distances (euclidean, manhattan)</p>
 </dd>
-<dt class="field-odd">param dataset</dt>
-<dd class="field-odd"><p>(bool) Whether this environment serves for image dataset generation</p>
+<dt class="field-odd">param active_cameras</dt>
+<dd class="field-odd"><p>(int) The number of camera used to render and record images</p>
 </dd>
-<dt class="field-even">param obs_space</dt>
-<dd class="field-even"><p>(string) Type of observation data. Specify “dict” for usage of HER training algorithm.</p>
+<dt class="field-even">param dataset</dt>
+<dd class="field-even"><p>(bool) Whether this environment serves for image dataset generation</p>
 </dd>
-<dt class="field-odd">param visualize</dt>
-<dd class="field-odd"><p>(bool) Whether to show helping visualization during training and testing of environment</p>
+<dt class="field-odd">param obs_space</dt>
+<dd class="field-odd"><p>(string) Type of observation data. Specify “dict” for usage of HER training algorithm.</p>
 </dd>
-<dt class="field-even">param visgym</dt>
-<dd class="field-even"><p>(bool) Whether to visualize whole gym building and other tasks (final visualization)</p>
+<dt class="field-even">param visualize</dt>
+<dd class="field-even"><p>(bool) Whether to show helping visualization during training and testing of environment</p>
 </dd>
-<dt class="field-odd">param logdir</dt>
-<dd class="field-odd"><p>(string) Directory for logging</p>
+<dt class="field-odd">param visgym</dt>
+<dd class="field-odd"><p>(bool) Whether to visualize whole gym building and other tasks (final visualization)</p>
 </dd>
-<dt class="field-even">param vae_path</dt>
-<dd class="field-even"><p>(string) Path to a trained VAE in 2dvu reward type</p>
+<dt class="field-even">param logdir</dt>
+<dd class="field-even"><p>(string) Directory for logging</p>
 </dd>
-<dt class="field-odd">param yolact_path</dt>
-<dd class="field-odd"><p>(string) Path to a trained Yolact in 3dvu reward type</p>
+<dt class="field-odd">param vae_path</dt>
+<dd class="field-odd"><p>(string) Path to a trained VAE in 2dvu reward type</p>
 </dd>
-<dt class="field-even">param yolact_config</dt>
-<dd class="field-even"><p>(string) Path to saved Yolact config obj or name of an existing one in the data/Config script or None for autodetection</p>
+<dt class="field-even">param yolact_path</dt>
+<dd class="field-even"><p>(string) Path to a trained Yolact in 3dvu reward type</p>
+</dd>
+<dt class="field-odd">param yolact_config</dt>
+<dd class="field-odd"><p>(string) Path to saved Yolact config obj or name of an existing one in the data/Config script or None for autodetection</p>
 </dd>
 </dl>
 </dd>

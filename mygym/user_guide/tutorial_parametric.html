@@ -219,7 +219,8 @@ directly using command line arguments. Alternatively, you can use a <em>config f
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">usage</span><span class="p">:</span> <span class="n">train</span> <span class="p">[</span><span class="o">-</span><span class="n">h</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">cfg</span> <span class="n">CONFIG</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">ENV_NAME</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">ws</span> <span class="n">WORKSPACE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">ENGINE</span><span class="p">]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">RENDER</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">c</span> <span class="n">CAMERA</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">vi</span> <span class="n">VISUALIZE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">vg</span> <span class="n">VISGYM</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">g</span> <span class="n">GUI</span><span class="p">]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">ROBOT</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">bi</span> <span class="p">[</span><span class="n">ROBOT_INIT</span> <span class="p">[</span><span class="n">ROBOT_INIT</span> <span class="o">...</span><span class="p">]]]</span> <span class="p">[</span><span class="o">-</span><span class="n">ba</span> <span class="n">ROBOT_ACTION</span><span class="p">]</span>
-             <span class="p">[</span><span class="o">-</span><span class="n">tt</span> <span class="n">TASK_TYPE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">to</span> <span class="p">[</span><span class="n">TASK_OBJECTS</span> <span class="p">[</span><span class="n">TASK_OBJECTS</span> <span class="o">...</span><span class="p">]]]</span>
+             <span class="p">[</span><span class="o">-</span><span class="n">tt</span> <span class="n">TASK_TYPE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">ns</span> <span class="n">NUM_SUBGOALS</span><span class="p">]</span>
+             <span class="p">[</span><span class="o">-</span><span class="n">to</span> <span class="p">[</span><span class="n">TASK_OBJECTS</span> <span class="p">[</span><span class="n">TASK_OBJECTS</span> <span class="o">...</span><span class="p">]]]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">u</span> <span class="p">[</span><span class="n">USED_OBJECTS</span> <span class="p">[</span><span class="n">USED_OBJECTS</span> <span class="o">...</span><span class="p">]]]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">oa</span> <span class="p">[</span><span class="n">OBJECT_SAMPLING_AREA</span> <span class="p">[</span><span class="n">OBJECT_SAMPLING_AREA</span> <span class="o">...</span><span class="p">]]]</span>
              <span class="p">[</span><span class="o">-</span><span class="n">rt</span> <span class="n">REWARD_TYPE</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">re</span> <span class="n">REWARD</span><span class="p">]</span> <span class="p">[</span><span class="o">-</span><span class="n">dt</span> <span class="n">DISTANCE_TYPE</span><span class="p">]</span>
@@ -235,7 +236,7 @@ directly using command line arguments. Alternatively, you can use a <em>config f
 <dl class="option-list">
 <dt><kbd>-cfg, --config</kbd></dt>
 <dd><p>Can be passed instead of all arguments</p>
-<p>Default: “configs/train.json”</p>
+<p>Default: “configs/trainTD3sde.json”</p>
 </dd>
 <dt><kbd>-n, --env_name</kbd></dt>
 <dd><p>The name of environment</p>
@@ -272,6 +273,9 @@ directly using command line arguments. Alternatively, you can use a <em>config f
 </dd>
 <dt><kbd>-tt, --task_type</kbd></dt>
 <dd><p>Type of task to learn: reach, push, throw, pick_and_place</p>
+</dd>
+<dt><kbd>-ns, --num_subgoals</kbd></dt>
+<dd><p>Number of subgoals in task</p>
 </dd>
 <dt><kbd>-to, --task_objects</kbd></dt>
 <dd><p>Object (for reach) or a pair of objects (for other tasks) to manipulate with</p>

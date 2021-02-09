@@ -202,27 +202,33 @@
 <p>The interaction with environment during training differs depending on type of task that is being trained. Therefore are <em>observations</em>, the necessary inputs for Reinforcement Learning, collected by this Task Module and are adjusted to particular task that is trained. The types of tasks implemented in myGym are: <strong>reach</strong>, <strong>push</strong>, <strong>throw</strong> and <strong>pick_and_place</strong>.</p>
 <span class="target" id="module-myGym.envs.task"></span><dl class="py class">
 <dt id="myGym.envs.task.TaskModule">
-<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.task.</code><code class="sig-name descname">TaskModule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_type</span><span class="o">=</span><span class="default_value">'reach'</span></em>, <em class="sig-param"><span class="n">task_objects</span><span class="o">=</span><span class="default_value">'cube_holes'</span></em>, <em class="sig-param"><span class="n">reward_type</span><span class="o">=</span><span class="default_value">'gt'</span></em>, <em class="sig-param"><span class="n">vae_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">distance_type</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">logdir</span><span class="o">=</span><span class="default_value">'/home/michal/code/github/myGym/myGym/envs'</span></em>, <em class="sig-param"><span class="n">env</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/task.html#TaskModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.task.TaskModule" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.task.</code><code class="sig-name descname">TaskModule</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">task_type</span><span class="o">=</span><span class="default_value">'reach'</span></em>, <em class="sig-param"><span class="n">task_objects</span><span class="o">=</span><span class="default_value">'cube_holes'</span></em>, <em class="sig-param"><span class="n">num_subgoals</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">reward_type</span><span class="o">=</span><span class="default_value">'gt'</span></em>, <em class="sig-param"><span class="n">vae_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_path</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">yolact_config</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">distance_type</span><span class="o">=</span><span class="default_value">'euclidean'</span></em>, <em class="sig-param"><span class="n">logdir</span><span class="o">=</span><span class="default_value">'/home/megi/git/myGym/myGym/envs'</span></em>, <em class="sig-param"><span class="n">env</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">pybullet_client</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/task.html#TaskModule"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.task.TaskModule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Task module class for task management</p>
 <dl class="simple">
 <dt>Parameters:</dt><dd><dl class="field-list simple">
 <dt class="field-odd">param task_type</dt>
 <dd class="field-odd"><p>(string) Type of learned task (reach, push, …)</p>
 </dd>
-<dt class="field-even">param task_objects</dt>
-<dd class="field-even"><p>(list of strings) Objects that are relevant for performing the task</p>
+<dt class="field-even">param num_subgoals</dt>
+<dd class="field-even"><p>(int) Number of subgoals in task</p>
 </dd>
-<dt class="field-odd">param reward_type</dt>
-<dd class="field-odd"><p>(string) Type of reward signal source (gt, 3dvs, 2dvu)</p>
+<dt class="field-odd">param task_objects</dt>
+<dd class="field-odd"><p>(list of strings) Objects that are relevant for performing the task</p>
 </dd>
-<dt class="field-even">param distance_type</dt>
-<dd class="field-even"><p>(string) Way of calculating distances (euclidean, manhattan)</p>
+<dt class="field-even">param reward_type</dt>
+<dd class="field-even"><p>(string) Type of reward signal source (gt, 3dvs, 2dvu)</p>
 </dd>
-<dt class="field-odd">param logdir</dt>
-<dd class="field-odd"><p>(string) Directory for logging</p>
+<dt class="field-odd">param distance_type</dt>
+<dd class="field-odd"><p>(string) Way of calculating distances (euclidean, manhattan)</p>
 </dd>
-<dt class="field-even">param env</dt>
-<dd class="field-even"><p>(object) Environment, where the training takes place</p>
+<dt class="field-even">param logdir</dt>
+<dd class="field-even"><p>(string) Directory for logging</p>
+</dd>
+<dt class="field-odd">param env</dt>
+<dd class="field-odd"><p>(object) Environment, where the training takes place</p>
+</dd>
+<dt class="field-even">param pybullet_client</dt>
+<dd class="field-even"><p>Which pybullet client the environment should refere to in case of parallel existence of multiple instances of this environment</p>
 </dd>
 </dl>
 </dd>
@@ -348,10 +354,10 @@
 <dl class="simple">
 <dt>Parameters:</dt><dd><dl class="field-list simple">
 <dt class="field-odd">param obj1</dt>
-<dd class="field-odd"><p>(float array) First object orientation (Euler angles)</p>
+<dd class="field-odd"><p>(float array) First object orientation (Quaternion xyzw)</p>
 </dd>
 <dt class="field-even">param obj2</dt>
-<dd class="field-even"><p>(float array) Second object orientation (Euler angles)</p>
+<dd class="field-even"><p>(float array) Second object orientation (Quaterion xyzw)</p>
 </dd>
 </dl>
 </dd>

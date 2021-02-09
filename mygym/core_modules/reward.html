@@ -365,6 +365,98 @@
 </dd></dl>
 
 <dl class="py class">
+<dt id="myGym.envs.rewards.PnPDistanceReward">
+<em class="property">class </em><code class="sig-prename descclassname">myGym.envs.rewards.</code><code class="sig-name descname">PnPDistanceReward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">env</span></em>, <em class="sig-param"><span class="n">task</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#PnPDistanceReward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.PnPDistanceReward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reward class for reward signal calculation based on distance differences between 4 objects, e.g. 1 object and gripper, finger1, finger2 for Panda</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param env</dt>
+<dd class="field-odd"><p>(object) Environment, where the training takes place</p>
+</dd>
+<dt class="field-even">param task</dt>
+<dd class="field-even"><p>(object) Task that is being trained, instance of a class TaskModule</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="myGym.envs.rewards.PnPDistanceReward.compute">
+<code class="sig-name descname">compute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">observation</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#PnPDistanceReward.compute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.PnPDistanceReward.compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute reward signal based on distances between 4 objects. The position of the objects must be present in observation.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param observation</dt>
+<dd class="field-odd"><p>(list) Observation of the environment</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return reward</dt>
+<dd class="field-odd"><p>(float) Reward signal for the environment</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.rewards.PnPDistanceReward.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#PnPDistanceReward.reset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.PnPDistanceReward.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset stored value of distance between objects. Call this after the end of an episode.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.rewards.PnPDistanceReward.calc_dist_diff">
+<code class="sig-name descname">calc_dist_diff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj1_position</span></em>, <em class="sig-param"><span class="n">obj2_position</span></em>, <em class="sig-param"><span class="n">obj3_position</span></em>, <em class="sig-param"><span class="n">obj4_position</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#PnPDistanceReward.calc_dist_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.PnPDistanceReward.calc_dist_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate change in the distances between 4 objects in previous and in current step. Normalize the change by the value of distance in previous step.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param obj1_position</dt>
+<dd class="field-odd"><p>(list) Position of the first object</p>
+</dd>
+<dt class="field-even">param obj2_position</dt>
+<dd class="field-even"><p>(list) Position of the second object</p>
+</dd>
+<dt class="field-odd">param obj3_position</dt>
+<dd class="field-odd"><p>(list) Position of the third object</p>
+</dd>
+<dt class="field-even">param obj4_position</dt>
+<dd class="field-even"><p>(list) Position of the fourth object</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return norm_diff</dt>
+<dd class="field-odd"><p>(float) Sum of normalized differences of distances between 4 objects in previsous and in current step</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="myGym.envs.rewards.PnPDistanceReward.calc_orn_diff">
+<code class="sig-name descname">calc_orn_diff</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">gripper_orn</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#PnPDistanceReward.calc_orn_diff"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.PnPDistanceReward.calc_orn_diff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate change in the distances between 4 objects in previous and in current step. Normalize the change by the value of distance in previous step.</p>
+<dl class="simple">
+<dt>Params:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">param gripper_orn</dt>
+<dd class="field-odd"><p>(list) Orientation of gripper</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><dl class="field-list simple">
+<dt class="field-odd">return norm_diff</dt>
+<dd class="field-odd"><p>(float) Normalized differences of distances between desired orientation and orientation of gripper</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="myGym.envs.rewards.SparseReward">
 <em class="property">class </em><code class="sig-prename descclassname">myGym.envs.rewards.</code><code class="sig-name descname">SparseReward</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">env</span></em>, <em class="sig-param"><span class="n">task</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/myGym/envs/rewards.html#SparseReward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#myGym.envs.rewards.SparseReward" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reward class for sparse reward signal</p>
